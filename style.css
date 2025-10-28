@@ -103,13 +103,22 @@ body {
 
 /* --- GERAL (Container, Secções, Títulos) --- */
 .container { width: 90%; max-width: 1100px; margin: 0 auto; }
+
+
+/* --- MUDANÇA 1: Separadores de Secção Temáticos (VERSÃO MAIS AGRESSIVA) --- */
 section { 
     padding: 5rem 0; 
     text-align: center; 
     position: relative; 
     background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://www.transparenttextures.com/patterns/dark-wood.png');
-    border-top: 2px solid var(--cor-borda);
+    /* border-top: 2px solid var(--cor-borda); */ /* <-- REMOVIDO */
+    
+    /* Efeito "Cinzelado / Rasgado" com vários picos */
+    -webkit-clip-path: polygon(0 4%, 15% 0, 30% 3%, 50% 1%, 70% 4%, 85% 0, 100% 3%, 100% 96%, 85% 100%, 70% 97%, 50% 99%, 30% 96%, 15% 100%, 0 97%);
+    clip-path: polygon(0 4%, 15% 0, 30% 3%, 50% 1%, 70% 4%, 85% 0, 100% 3%, 100% 96%, 85% 100%, 70% 97%, 50% 99%, 30% 96%, 15% 100%, 0 97%);
+    margin-top: -4%; /* Ajuste de margem para o novo corte (pode precisar de -3% ou -5%) */
 }
+
 h1, h2, h3, h4, h5, h6 { font-family: var(--fonte-titulos); color: var(--cor-primaria); margin-bottom: 1rem; font-weight: 700; }
 h2 { 
     font-size: 2.5rem; 
@@ -127,48 +136,62 @@ p { margin-bottom: 1rem; font-weight: 300; }
 .navbar {
     background: #0a0a0a; 
     border-bottom: 2px solid var(--cor-borda);
-    /* padding: 0.5rem 0; */ /* <-- Removido para controlar a altura exata */
-    height: 70px; /* <-- PASSO 1: Defina a altura total da barra aqui (ex: 70px) */
+    height: 70px; 
     position: sticky; 
     top: 0; 
     z-index: 100;
 }
-
 .navbar .container { 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    height: 100%; /* Faz o container ocupar os 70px de altura */
+    height: 100%; 
 }
-
 .navbar > .container {
     width: 100%;
     max-width: none;
     padding: 0 2.5rem; 
 }
-
 .navbar .logo {
     display: block;
-    /* padding: 5px 0; */ /* <-- Removido. O 'align-items: center' já centra o logo */
     transition: transform 0.3s ease;
 }
-
 .navbar .logo:hover { 
     transform: scale(2.05); 
 }
-
 .navbar .logo img {
     width: auto;
-    /* height: 100px; */ /* <-- Removida a altura fixa */
-    max-height: 50px; /* <-- PASSO 2: Altura MÁXIMA (tem de ser MENOR que os 70px da barra) */
+    max-height: 50px; 
     display: block;
 }
 
-/* O resto do seu código (.nav-menu, .nav-toggle, etc.) fica igual */
 .nav-menu ul { list-style: none; display: flex; }
-.nav-menu a { color: var(--cor-texto); text-decoration: none; padding: 0.5rem 1rem; font-weight: 700; transition: color 0.3s ease; }
-.nav-menu a:hover, .nav-menu a.cta-nav { color: var(--cor-primaria); }
-.nav-menu a.cta-nav { border: 2px solid var(--cor-primaria); border-radius: 5px; margin-left: 1rem; }
+
+/* --- MUDANÇA 2: Brilho de Brasa (Menu) --- */
+.nav-menu a { 
+    color: var(--cor-texto); 
+    text-decoration: none; 
+    padding: 0.5rem 1rem; 
+    font-weight: 700; 
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Transição de sombra */
+}
+.nav-menu a:hover { 
+    color: var(--cor-primaria-brilho);
+    text-shadow: 0 0 12px var(--cor-primaria-brilho); /* Efeito brasa */
+}
+.nav-menu a.cta-nav { 
+    color: var(--cor-primaria); /* Cor original do CTA */
+    border: 2px solid var(--cor-primaria); 
+    border-radius: 5px; 
+    margin-left: 1rem; 
+    text-shadow: none; /* Remove sombra no estado normal */
+}
+.nav-menu a.cta-nav:hover {
+    color: var(--cor-primaria-brilho); /* Mantém consistência no hover */
+    text-shadow: 0 0 12px var(--cor-primaria-brilho); /* Adiciona brasa no hover */
+}
+/* --- FIM MUDANÇA 2 --- */
+
 .nav-toggle { display: none; background: none; border: none; color: var(--cor-texto); font-size: 1.8rem; cursor: pointer; }
 
 /* --- NOVOS CONTROLOS MOBILE --- */
@@ -183,6 +206,11 @@ p { margin-bottom: 1rem; font-weight: 300; }
     height: 90vh; display: flex; justify-content: center; align-items: center; 
     text-align: center; padding: 0 2rem; position: relative; overflow: hidden; 
     border-top: none; 
+    
+    /* --- MUDANÇA 1 (Reset) --- */
+    -webkit-clip-path: none;
+    clip-path: none;
+    margin-top: 0;
 }
 .hero-video {
     position: absolute;
@@ -196,17 +224,39 @@ p { margin-bottom: 1rem; font-weight: 300; }
     object-fit: cover; 
     z-index: 0; 
 }
+
+/* ================================== */
+/* MUDANÇA DO GIF (CSS)       */
+/* ================================== */
+/* DEIXA ASSIM: */
+.hero-bg-gif {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    z-index: 2; /* <-- PARA 2 */
+    opacity: 0.3; /* <-- AUMENTA (EXPERIMENTA 0.3 ou 0.4) */
+    /* mix-blend-mode: screen; */ /* <-- Linha removida/comentada */
+}
+/* ================================== */
+/* FIM DA MUDANÇA DO GIF (CSS)  */
+/* ================================== */
+
+
+/* DEIXA ASSIM: */
 #hero::before {
     content: '';
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.85); /* 85% preto */
-    z-index: 1; 
+    z-index: 1; /* <-- PARA 1 */
 }
 .hero-content { 
     position: relative; 
-    z-index: 3; /* Z-index 2 é das partículas agora */
+    z-index: 4; /* <-- MUDANÇA: de 3 para 4 (acima do canvas/partículas) */
 }
 /* ESTILO PARA O H1 VISÍVEL */
 .hero-title-main {
@@ -230,6 +280,12 @@ p { margin-bottom: 1rem; font-weight: 300; }
     background-image: none; 
     background-color: transparent; 
     border-top: none; 
+
+    /* --- MUDANÇA 1 (Reset) --- */
+    -webkit-clip-path: none;
+    clip-path: none;
+    margin-top: 0;
+    padding-top: 5rem; /* Devolve o padding original */
 }
 /* Adiciona o 'display: flex' ao novo wrapper (REGRA CORRIGIDA) */
 .pilares-wrapper {
@@ -261,7 +317,12 @@ p { margin-bottom: 1rem; font-weight: 300; }
     background-attachment: fixed; background-position: center;
     background-repeat: no-repeat; background-size: cover; z-index: 1;
 }
-.parallax-bg::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(18, 18, 18, 0.85); z-index: -1; }
+/* Adiciona a camada escura */
+#sobre::before { 
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    background-color: rgba(18, 18, 18, 0.85); 
+    z-index: -1; 
+}
 #sobre .container { position: relative; z-index: 2; }
 
 /* --- ESTILO "CLÃ" REFEITO PARA PERFIS --- */
@@ -290,7 +351,24 @@ p { margin-bottom: 1rem; font-weight: 300; }
     aspect-ratio: 1 / 1; /* Imagem quadrada */
     overflow: hidden;
     border-bottom: 2px solid var(--cor-borda);
+    position: relative; /* --- MUDANÇA 4: Necessário para a textura --- */
 }
+
+/* --- MUDANÇA 4: Textura "Gasta" na Foto do Clã --- */
+.clã-card-img::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/scratchy-metal-1.png');
+    opacity: 0.08;
+    pointer-events: none;
+    mix-blend-mode: overlay; /* Fica mais subtil e integrado */
+}
+/* --- FIM MUDANÇA 4 --- */
+
 .clã-card-img img {
     width: 100%;
     height: 100%;
@@ -350,6 +428,20 @@ p { margin-bottom: 1rem; font-weight: 300; }
 }
 .historia-coluna h3 { margin-top: 0; }
 .historia-coluna p { opacity: 0.9; }
+
+/* --- MUDANÇA 3: Capitulares de Saga --- */
+.historia-coluna p::first-letter {
+    font-family: var(--fonte-titulos);
+    color: var(--cor-primaria);
+    font-size: 3.5rem;
+    font-weight: 700;
+    float: left;
+    padding-right: 0.8rem;
+    line-height: 0.8;
+    margin-top: 0.3rem;
+}
+/* --- FIM MUDANÇA 3 --- */
+
 
 /* --- SECÇÃO SERVIÇOS (TÁBUA DE TRIBUTOS HTML) --- */
 #servicos { background-color: var(--cor-fundo); }
@@ -419,7 +511,35 @@ p { margin-bottom: 1rem; font-weight: 300; }
 
 
 /* --- SECÇÃO GALERIA (CORRIGIDA) --- */
-#galeria { background-color: var(--cor-fundo); }
+#galeria { 
+    /* background-color: var(--cor-fundo); */ /* <-- REMOVIDO */
+
+    /* --- MUDANÇA (NOVO BG) --- */
+    background-image: url('caveira-tranca.jpeg'); /* <-- O NOME DO SEU NOVO UPLOAD */
+    background-attachment: fixed; 
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    z-index: 1;
+    /* --- FIM MUDANÇA --- */
+}
+
+/* Adiciona a camada escura, tal como na secção #sobre */
+#galeria::before {
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(18, 18, 18, 0.85); /* 85% preto, igual a #sobre */
+    z-index: -1;
+}
+/* Garante que o conteúdo fica por cima */
+#galeria .container {
+    position: relative;
+    z-index: 2;
+}
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-top: 2rem; }
 .gallery-grid a {
     display: block; height: 300px;
@@ -428,6 +548,7 @@ p { margin-bottom: 1rem; font-weight: 300; }
     text-decoration: none;
     transition: transform 0.4s ease, opacity 0.4s ease;
     overflow: hidden;
+    position: relative; /* --- MUDANÇA 5: Necessário para overlay --- */
 }
 .gallery-grid a img {
     width: 100%; height: 100%;
@@ -440,6 +561,43 @@ p { margin-bottom: 1rem; font-weight: 300; }
     filter: grayscale(0%);
     transform: scale(1.1);
 }
+
+/* --- MUDANÇA 5: Overlay de Hover na Galeria --- */
+.gallery-grid a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+.gallery-grid a::after {
+    content: '\f06e'; /* Código FontAwesome para "olho" */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5); /* Começa pequeno */
+    opacity: 0;
+    transition: all 0.4s ease;
+    z-index: 2; /* Fica por cima do ::before */
+}
+.gallery-grid a:hover::before {
+    opacity: 1; /* Mostra a camada escura */
+}
+.gallery-grid a:hover::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); /* Mostra o ícone */
+}
+/* --- FIM MUDANÇA 5 --- */
+
 
 /* --- ESTILOS DOS BOTÕES --- */
 .cta-button, .cta-secondary {
@@ -457,16 +615,23 @@ p { margin-bottom: 1rem; font-weight: 300; }
     transition: all 0.3s ease;
     cursor: pointer; /* Para botões que não são links */
 }
+
+/* --- MUDANÇA 4: Botões "Forjados" --- */
 .cta-button {
-    background-color: var(--cor-primaria);
+    background-color: var(--cor-primaria); /* Fallback */
+    background-image: linear-gradient(to bottom, var(--cor-primaria-brilho) 0%, var(--cor-primaria) 70%, #9a2a1f 100%);
     color: #fff;
+    border: 2px solid #8c241a; /* Borda um pouco mais escura */
 }
 .cta-button:hover {
-    background-color: var(--cor-primaria-brilho);
+    background-color: var(--cor-primaria-brilho); /* Fallback */
+    background-image: linear-gradient(to bottom, #ff5e4c 0%, var(--cor-primaria-brilho) 70%, var(--cor-primaria) 100%); /* Mais brilhante */
     border-color: var(--cor-primaria-brilho);
     transform: translateY(-3px);
     box-shadow: var(--sombra-brasa); 
 }
+/* --- FIM MUDANÇA 4 --- */
+
 .cta-secondary {
     background-color: transparent;
     color: var(--cor-primaria);
@@ -482,12 +647,16 @@ p { margin-bottom: 1rem; font-weight: 300; }
 #marcar { background-color: var(--cor-fundo-secundario); }
 /* Estilo ajustado para o botão de tattoo */
 .cta-button.cta-tattoo { 
+    background-image: none; /* Remove o gradiente do botão "forjado" */
     background-color: transparent; 
     color: var(--cor-primaria); 
+    border-color: var(--cor-primaria); /* Restaura a borda primária */
 }
 .cta-button.cta-tattoo:hover { 
+    background-image: none; /* Remove o gradiente do botão "forjado" */
     background-color: var(--cor-primaria); 
     color: #fff; 
+    border-color: var(--cor-primaria); /* Restaura a borda primária */
 }
 .contact-info { margin-top: 4rem; line-height: 2; }
 
@@ -515,6 +684,12 @@ footer {
     background: #0a0a0a; color: #777; padding: 2.5rem 0;
     text-align: center; border-top: 2px solid var(--cor-borda);
     background-image: none; 
+
+    /* --- MUDANÇA 1 (Reset) --- */
+    /* O Footer não é uma <section>, mas garantimos que não tem clip-path */
+    -webkit-clip-path: none;
+    clip-path: none;
+    margin-top: 0;
 }
 .footer-logo {
     display: block;
@@ -643,6 +818,20 @@ footer .social-links i { margin-right: 0.5rem; }
 /* --- AJUSTES FINAIS PARA MOBILE (CORRIGIDO) --- */
 /* --- ======================================== --- */
 @media (max-width: 800px) {
+    /* --- MUDANÇA 1 (Mobile) --- */
+    /* Em mobile, o efeito clip-path é demasiado. Removemos. */
+    section {
+        -webkit-clip-path: none;
+        clip-path: none;
+        margin-top: 0;
+        border-top: 2px solid var(--cor-borda); /* Traz de volta a borda simples */
+    }
+    #hero, #pilares {
+        border-top: none; /* Garante que estas continuam sem borda */
+    }
+    /* --- FIM MUDANÇA 1 (Mobile) --- */
+
+
     .navbar > .container {
         padding: 0 1.5rem;
     }
@@ -657,6 +846,13 @@ footer .social-links i { margin-right: 0.5rem; }
     .hero-title-main {
         font-size: 3rem;
     }
+    
+    /* --- MUDANÇA GIF (Mobile) --- */
+    .hero-bg-gif {
+        opacity: 0.1; /* Ainda mais subtil em mobile */
+    }
+    /* --- FIM MUDANÇA GIF (Mobile) --- */
+
 
     .hero-subtitle { font-size: 1.2rem; }
     h2 { font-size: 2rem; }

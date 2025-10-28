@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
             width: "100%",
             height: "100%",
             pointerEvents: "none",
-            zIndex: "2"
+            zIndex: "3" /* <-- MUDANÇA: de "2" para "3" (para ficar acima da camada preta/gif) */
         });
 
         let w, h;
