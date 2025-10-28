@@ -1,0 +1,769 @@
+/* --- CONFIGURAÇÃO GERAL --- */
+:root {
+    --cor-fundo: #121212;
+    --cor-fundo-secundario: #1a1a1a;
+    --cor-texto: #e0e0e0;
+    --cor-primaria: #c0392b; /* Vermelho-sangue */
+    --cor-primaria-brilho: #e74c3c; /* Vermelho-brasa */
+    --cor-borda: #333;
+    --cor-whatsapp: #25D366;
+    --fonte-titulos: 'Cinzel Decorative', serif;
+    --fonte-corpo: 'Lato', sans-serif;
+    --sombra-brasa: 0 0 15px rgba(231, 76, 60, 0.4); /* Efeito "Brasa" */
+}
+
+/* --- NOVO: PRELOADER (ECRÃ DE CARREGAMENTO) --- */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--cor-fundo);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    visibility: visible;
+    opacity: 1;
+}
+.preloader-logo {
+    width: 150px;
+    opacity: 0.8;
+    animation: pulse-logo 1.5s infinite ease-in-out;
+}
+@keyframes pulse-logo {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+
+/* --- NOVO: SCROLLBAR PERSONALIZADA --- */
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #0a0a0a; /* Cor de fundo da barra */
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--cor-primaria); /* Cor do "elevador" */
+    border-radius: 10px;
+    border: 2px solid #0a0a0a;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--cor-primaria-brilho); /* Cor ao passar o rato */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: var(--fonte-corpo);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://www.transparenttextures.com/patterns/dark-wood.png');
+    overflow-x: hidden; 
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- BOTÕES FLUTUANTES --- */
+.whatsapp-float {
+    position: fixed; width: 60px; height: 60px; bottom: 30px; right: 30px;
+    background-color: var(--cor-whatsapp); color: #FFF; border-radius: 50px;
+    text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    z-index: 100; display: flex; justify-content: center; align-items: center;
+    transition: transform 0.3s ease;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+.music-button {
+    position: fixed; width: 50px; height: 50px; bottom: 30px; left: 30px;
+    background-color: var(--cor-fundo-secundario); color: var(--cor-texto);
+    border: 2px solid var(--cor-borda); border-radius: 50px; text-align: center;
+    font-size: 20px; z-index: 100; cursor: pointer; display: flex;
+    justify-content: center; align-items: center; transition: all 0.3s ease;
+    
+    /* ANIMAÇÃO DE PULSE ADICIONADA */
+    animation: pulse-animation 3s infinite ease-in-out;
+}
+.music-button:hover { 
+    color: var(--cor-primaria); 
+    border-color: var(--cor-primaria);
+    box-shadow: var(--sombra-brasa); 
+    animation-play-state: paused; /* Pausa a animação ao passar o rato */
+}
+
+/* Keyframes para a animação de pulse */
+@keyframes pulse-animation {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(192, 57, 43, 0.3); }
+    50% { transform: scale(1.05); box-shadow: 0 0 5px 10px rgba(192, 57, 43, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(192, 57, 43, 0); }
+}
+
+
+/* --- GERAL (Container, Secções, Títulos) --- */
+.container { width: 90%; max-width: 1100px; margin: 0 auto; }
+section { 
+    padding: 5rem 0; 
+    text-align: center; 
+    position: relative; 
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://www.transparenttextures.com/patterns/dark-wood.png');
+    border-top: 2px solid var(--cor-borda);
+}
+h1, h2, h3, h4, h5, h6 { font-family: var(--fonte-titulos); color: var(--cor-primaria); margin-bottom: 1rem; font-weight: 700; }
+h2 { 
+    font-size: 2.5rem; 
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5), var(--sombra-brasa);
+}
+h3 { color: var(--cor-texto); font-size: 1.5rem; }
+h4 { color: var(--cor-primaria-brilho); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-family: var(--fonte-corpo); font-weight: 700; }
+p { margin-bottom: 1rem; font-weight: 300; }
+.section-subtitle { font-size: 1.1rem; max-width: 600px; margin: -1rem auto 2rem auto; opacity: 0.8; }
+.hidden-title { display: none; } 
+
+/* --- NAVEGAÇÃO (LOGO CORRIGIDO) --- */
+.navbar {
+    background: #0a0a0a; 
+    border-bottom: 2px solid var(--cor-borda);
+    /* padding: 0.5rem 0; */ /* <-- Removido para controlar a altura exata */
+    height: 70px; /* <-- PASSO 1: Defina a altura total da barra aqui (ex: 70px) */
+    position: sticky; 
+    top: 0; 
+    z-index: 100;
+}
+
+.navbar .container { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    height: 100%; /* Faz o container ocupar os 70px de altura */
+}
+
+.navbar > .container {
+    width: 100%;
+    max-width: none;
+    padding: 0 2.5rem; 
+}
+
+.navbar .logo {
+    display: block;
+    /* padding: 5px 0; */ /* <-- Removido. O 'align-items: center' já centra o logo */
+    transition: transform 0.3s ease;
+}
+
+.navbar .logo:hover { 
+    transform: scale(2.05); 
+}
+
+.navbar .logo img {
+    width: auto;
+    /* height: 100px; */ /* <-- Removida a altura fixa */
+    max-height: 50px; /* <-- PASSO 2: Altura MÁXIMA (tem de ser MENOR que os 70px da barra) */
+    display: block;
+}
+
+/* O resto do seu código (.nav-menu, .nav-toggle, etc.) fica igual */
+.nav-menu ul { list-style: none; display: flex; }
+.nav-menu a { color: var(--cor-texto); text-decoration: none; padding: 0.5rem 1rem; font-weight: 700; transition: color 0.3s ease; }
+.nav-menu a:hover, .nav-menu a.cta-nav { color: var(--cor-primaria); }
+.nav-menu a.cta-nav { border: 2px solid var(--cor-primaria); border-radius: 5px; margin-left: 1rem; }
+.nav-toggle { display: none; background: none; border: none; color: var(--cor-texto); font-size: 1.8rem; cursor: pointer; }
+
+/* --- NOVOS CONTROLOS MOBILE --- */
+.mobile-controls {
+    display: none; /* Escondido em desktop por defeito */
+    align-items: center;
+    gap: 0.5rem; /* Espaço entre o botão "Marcar" e o "Menu" */
+}
+
+/* --- SECÇÃO HERÓI (VÍDEO DE FUNDO) --- */
+#hero { 
+    height: 90vh; display: flex; justify-content: center; align-items: center; 
+    text-align: center; padding: 0 2rem; position: relative; overflow: hidden; 
+    border-top: none; 
+}
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover; 
+    z-index: 0; 
+}
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* 85% preto */
+    z-index: 1; 
+}
+.hero-content { 
+    position: relative; 
+    z-index: 3; /* Z-index 2 é das partículas agora */
+}
+/* ESTILO PARA O H1 VISÍVEL */
+.hero-title-main {
+    font-size: 4rem; /* Ajustar tamanho conforme gosto */
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0,0,0,0.7), 0 0 20px var(--cor-primaria-brilho);
+    margin-bottom: 0.5rem;
+    letter-spacing: 3px;
+}
+.hero-subtitle { 
+    font-size: 1.5rem; color: #fff; font-weight: 300; 
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    font-family: var(--fonte-titulos); 
+}
+
+
+/* --- SECÇÃO PILARES --- */
+#pilares { 
+    /* O 'display: flex' FOI REMOVIDO DAQUI */
+    background-image: none; 
+    background-color: transparent; 
+    border-top: none; 
+}
+/* Adiciona o 'display: flex' ao novo wrapper (REGRA CORRIGIDA) */
+.pilares-wrapper {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    margin-top: 3rem; /* Espaço para o novo título */
+}
+.pillar-box { 
+    flex: 1; 
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://www.transparenttextures.com/patterns/dark-wood.png');
+    background-color: var(--cor-fundo-secundario); 
+    padding: 2.5rem; 
+    border: 2px solid var(--cor-borda); 
+    border-radius: 5px; 
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; 
+}
+.pillar-box:hover { 
+    transform: translateY(-10px); 
+    border-color: var(--cor-primaria); 
+    box-shadow: var(--sombra-brasa);
+}
+.icon-placeholder { font-size: 3rem; color: var(--cor-primaria); margin-bottom: 1rem; }
+.icon-placeholder i { font-size: 3.5rem; }
+
+/* --- SECÇÃO SOBRE (PARALLAX ATUALIZADO) --- */
+#sobre {
+    background-image: url('caveira-runas.jpeg'); 
+    background-attachment: fixed; background-position: center;
+    background-repeat: no-repeat; background-size: cover; z-index: 1;
+}
+.parallax-bg::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(18, 18, 18, 0.85); z-index: -1; }
+#sobre .container { position: relative; z-index: 2; }
+
+/* --- ESTILO "CLÃ" REFEITO PARA PERFIS --- */
+.clã-grid { 
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    flex-wrap: wrap; 
+}
+.clã-card {
+    flex-basis: 320px;
+    background-color: var(--cor-fundo-secundario);
+    border: 2px solid var(--cor-borda);
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+}
+.clã-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5), var(--sombra-brasa);
+}
+.clã-card-img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Imagem quadrada */
+    overflow: hidden;
+    border-bottom: 2px solid var(--cor-borda);
+}
+.clã-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.clã-card:hover .clã-card-img img {
+    transform: scale(1.05);
+}
+.clã-card-content {
+    padding: 1.5rem;
+}
+.clã-card h3 {
+    color: var(--cor-texto);
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+.clã-card p {
+    padding: 0;
+    opacity: 0.8;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* --- SECÇÃO GALERIA (ATUALIZAÇÃO) --- */
+.gallery-subtitle {
+    color: var(--cor-primaria-brilho);
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-top: 3.5rem; /* Espaço entre as duas galerias */
+    margin-bottom: -0.5rem; /* Puxa a grelha um pouco para cima */
+    text-shadow: var(--sombra-brasa);
+}
+/* O primeiro subtítulo não precisa de tanto espaço em cima */
+#galeria .container > .gallery-subtitle:first-of-type {
+    margin-top: 2.5rem;
+}
+/* Remove a margem superior da grelha para ficar bem com o subtítulo */
+.gallery-grid {
+    margin-top: 1.5rem; 
+}
+
+/* --- SECÇÃO HISTÓRIA (COM COLUNAS) --- */
+#historia {
+    background-color: var(--cor-fundo-secundario); 
+}
+.historia-content {
+    max-width: 900px; /* Um pouco mais largo para as colunas */
+    margin: 2rem auto 0 auto;
+    text-align: left; 
+    line-height: 1.8;
+}
+.historia-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+}
+.historia-coluna h3 { margin-top: 0; }
+.historia-coluna p { opacity: 0.9; }
+
+/* --- SECÇÃO SERVIÇOS (TÁBUA DE TRIBUTOS HTML) --- */
+#servicos { background-color: var(--cor-fundo); }
+
+.tabua-tributos-container {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('precos.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 4px solid var(--cor-borda);
+    border-radius: 5px;
+    max-width: 700px; /* Aumentar um pouco para a nova categoria */
+    width: 100%;
+    margin: 2rem auto 0 auto;
+    padding: 2.5rem 2rem;
+    text-align: left;
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.6);
+}
+.tributos-categoria h2 {
+    color: var(--cor-texto); /* Branco para contraste */
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+.tributos-categoria ul {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+.tributos-categoria ul:last-child {
+    margin-bottom: 0;
+}
+.tributo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Alinha o preço ao topo */
+    margin-bottom: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 2px dotted var(--cor-borda);
+    gap: 1rem;
+}
+.tributo-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.tributo-item h3 {
+    font-family: var(--fonte-titulos);
+    color: var(--cor-texto);
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+.tributo-descricao {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-texto);
+    opacity: 0.7;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+.tributo-preco {
+    font-family: var(--fonte-titulos);
+    color: var(--cor-texto);
+    font-size: 1.3rem;
+    font-weight: 700;
+    white-space: nowrap;
+    margin-left: 1rem;
+}
+
+
+/* --- SECÇÃO GALERIA (CORRIGIDA) --- */
+#galeria { background-color: var(--cor-fundo); }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-top: 2rem; }
+.gallery-grid a {
+    display: block; height: 300px;
+    background-color: var(--cor-fundo-secundario);
+    border: 3px solid var(--cor-borda);
+    text-decoration: none;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    overflow: hidden;
+}
+.gallery-grid a img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    font-size: 0; color: transparent;
+    filter: grayscale(100%);
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+.gallery-grid a:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+/* --- ESTILOS DOS BOTÕES --- */
+.cta-button, .cta-secondary {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    margin: 0.5rem;
+    border: 2px solid var(--cor-primaria);
+    border-radius: 5px;
+    color: var(--cor-primaria);
+    text-decoration: none;
+    font-family: var(--fonte-titulos);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    cursor: pointer; /* Para botões que não são links */
+}
+.cta-button {
+    background-color: var(--cor-primaria);
+    color: #fff;
+}
+.cta-button:hover {
+    background-color: var(--cor-primaria-brilho);
+    border-color: var(--cor-primaria-brilho);
+    transform: translateY(-3px);
+    box-shadow: var(--sombra-brasa); 
+}
+.cta-secondary {
+    background-color: transparent;
+    color: var(--cor-primaria);
+}
+.cta-secondary:hover {
+    background-color: var(--cor-primaria);
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: var(--sombra-brasa); 
+}
+
+/* --- SECÇÃO CONTACTO (MAPA) --- */
+#marcar { background-color: var(--cor-fundo-secundario); }
+/* Estilo ajustado para o botão de tattoo */
+.cta-button.cta-tattoo { 
+    background-color: transparent; 
+    color: var(--cor-primaria); 
+}
+.cta-button.cta-tattoo:hover { 
+    background-color: var(--cor-primaria); 
+    color: #fff; 
+}
+.contact-info { margin-top: 4rem; line-height: 2; }
+
+/* Iframe do mapa - AGORA COM O TEMA VIKING */
+#marcar iframe {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-top: 2.5rem;
+    
+    /* O FEITIÇO VIKING: */
+    border: 3px solid var(--cor-borda); /* Adiciona uma borda a condizer */
+    filter: grayscale(100%) invert(90%) brightness(0.9) contrast(1.1);
+    transition: filter 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Magia extra: ao passar o rato, o mapa revela as suas cores verdadeiras */
+#marcar iframe:hover {
+    filter: none;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5), var(--sombra-brasa);
+}
+
+
+/* --- RODAPÉ (COM LOGO) --- */
+footer {
+    background: #0a0a0a; color: #777; padding: 2.5rem 0;
+    text-align: center; border-top: 2px solid var(--cor-borda);
+    background-image: none; 
+}
+.footer-logo {
+    display: block;
+    margin: 0 auto 1.5rem auto;
+    width: 150px;
+}
+.footer-logo img {
+    width: 100%;
+    height: auto;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+.footer-logo:hover img {
+    opacity: 0.8;
+}
+footer .social-links a { color: #777; text-decoration: none; margin: 0 0.5rem; font-weight: 700; }
+footer .social-links a:hover { color: var(--cor-primaria); }
+footer .social-links i { margin-right: 0.5rem; }
+
+
+/* --- ======================================== --- */
+/* --- NOVOS ESTILOS: MODAL DE ORÇAMENTO TATTOO --- */
+/* --- ======================================== --- */
+#tattoo-modal-overlay {
+    display: none; /* Escondido por defeito */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    padding: 2rem;
+    overflow-y: auto; /* Permite scroll se o conteúdo for grande */
+}
+
+#tattoo-modal {
+    position: relative;
+    max-width: 600px;
+    margin: 3rem auto;
+    background-color: var(--cor-fundo-secundario);
+    border: 2px solid var(--cor-borda);
+    border-radius: 5px;
+    padding: 2.5rem;
+    z-index: 1001;
+    text-align: left;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5), var(--sombra-brasa);
+}
+#tattoo-modal h2 {
+    text-align: center;
+    margin-top: 0;
+}
+#tattoo-modal p {
+    text-align: center;
+    opacity: 0.8;
+    margin-bottom: 2rem;
+}
+
+#modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--cor-texto);
+    font-size: 2.5rem;
+    font-weight: 300;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+#modal-close-btn:hover {
+    color: var(--cor-primaria);
+}
+
+.tattoo-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+.tattoo-form label {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--cor-texto);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.tattoo-form input[type="text"],
+.tattoo-form input[type="email"],
+.tattoo-form input[type="tel"],
+.tattoo-form textarea,
+.tattoo-form input[type="file"] {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--cor-fundo);
+    border: 2px solid var(--cor-borda);
+    border-radius: 5px;
+    color: var(--cor-texto);
+    font-family: var(--fonte-corpo);
+    font-size: 1rem;
+}
+.tattoo-form input[type="text"]:focus,
+.tattoo-form input[type="email"]:focus,
+.tattoo-form input[type="tel"]:focus,
+.tattoo-form textarea:focus {
+    border-color: var(--cor-primaria);
+    outline: none;
+    box-shadow: var(--sombra-brasa);
+}
+.tattoo-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+.tattoo-form button.cta-button {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+
+/* --- ======================================== --- */
+/* --- AJUSTES FINAIS PARA MOBILE (CORRIGIDO) --- */
+/* --- ======================================== --- */
+@media (max-width: 800px) {
+    .navbar > .container {
+        padding: 0 1.5rem;
+    }
+    .navbar .logo { 
+        padding: 2px 0; 
+    }
+    .navbar .logo img {
+        height: 40px;
+    }
+
+    /* Título H1 em mobile */
+    .hero-title-main {
+        font-size: 3rem;
+    }
+
+    .hero-subtitle { font-size: 1.2rem; }
+    h2 { font-size: 2rem; }
+    .pilares-wrapper, .clã-grid { flex-direction: column; }
+    #pilares { background-image: none; border-top: 2px solid var(--cor-borda); }
+    .clã-grid { align-items: center; }
+
+    /* Colunas da história empilhadas em mobile */
+    .historia-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Tabela de preços em mobile */
+    .tabua-tributos-container {
+        padding: 2rem 1.5rem;
+    }
+    .tributo-item h3 { font-size: 1.1rem; }
+    .tributo-preco { font-size: 1.1rem; }
+
+    .cta-button { margin: 0.5rem 0; display: block; width: 100%; }
+    .cta-button.cta-tattoo { margin-left: 0; }
+    .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; font-size: 24px;}
+    .music-button { width: 40px; height: 40px; bottom: 20px; left: 20px; font-size: 16px;}
+
+    /* Modal em mobile */
+    #tattoo-modal {
+        padding: 2rem 1.5rem;
+        margin: 1rem auto;
+    }
+
+    /* --- CORREÇÕES DO MENU MOBILE E BOTÃO --- */
+
+    /* 1. Faz os controlos mobile aparecerem */
+    .mobile-controls {
+        display: flex; /* <-- ISTO ALINHA O BOTÃO E O MENU LADO A LADO */
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    /* 2. Mostra o botão hambúrguer */
+    .nav-toggle {
+        display: block; 
+    }
+
+    /* 3. Esconde o menu de desktop e prepara o menu pop-up */
+    .nav-menu {
+        display: none; /* Escondido por defeito */
+        position: absolute;
+        top: 61px; /* Altura da tua navbar */
+        left: 0;
+        width: 100%;
+        background-color: #0a0a0a; /* Fundo igual à navbar */
+        border-bottom: 2px solid var(--cor-borda);
+        flex-direction: column; /* Empilha os links */
+        padding: 1rem 0;
+    }
+    .nav-menu.nav-visible {
+        display: flex; /* Mostra o menu quando o JS adiciona esta classe */
+    }
+    .nav-menu ul {
+        flex-direction: column;
+        width: 100%;
+    }
+    .nav-menu li {
+        text-align: center;
+        width: 100%;
+    }
+    .nav-menu a {
+        padding: 1rem;
+        display: block; /* Ocupa a largura toda */
+        border-bottom: 1px solid var(--cor-borda);
+    }
+    .nav-menu li:last-child a {
+        border-bottom: none;
+    }
+    
+    /* 4. Esconde o botão "Marcar" de DENTRO do menu pop-up (para não duplicar) */
+    .nav-menu a.cta-nav {
+        display: none;
+    }
+
+    /* 5. Estilo do novo botão "Marcar" mobile */
+    .cta-nav-mobile {
+        /* Estilos base que faltavam */
+        color: var(--cor-primaria);
+        text-decoration: none;
+        font-weight: 700;
+        font-family: var(--fonte-titulos);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        
+        /* Estilos da borda */
+        border: 2px solid var(--cor-primaria);
+        border-radius: 5px;
+        
+        /* Tamanhos */
+        padding: 0.4rem 0.8rem; 
+        font-size: 0.9rem;
+        line-height: 1.2; 
+        margin: 0;
+    }
+    
+    /* 6. Efeito hover para o novo botão */
+    .cta-nav-mobile:hover {
+        color: #fff;
+        background-color: var(--cor-primaria);
+    }
+} /* <-- FIM DO @media */
