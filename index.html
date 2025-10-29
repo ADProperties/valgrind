@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
 
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -42,7 +44,7 @@
                 <img src="logo.jpeg" alt="Valgrind Logo"> </a>
 
             <div class="mobile-controls">
-                <a href="#marcar" class="cta-nav cta-nav-mobile">Marcar</a>
+                <a href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/davidazdias777/corte-de-cabelo?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=ff0000'});return false;" class="cta-nav cta-nav-mobile">Marcar</a>
                 
                 <button class="nav-toggle" aria-label="Abrir menu">
                     <i class="fa-solid fa-bars" aria-hidden="true"></i>
@@ -56,7 +58,7 @@
                     <li><a href="#historia">A Lenda</a></li>
                     <li><a href="#servicos">Tributos</a></li>
                     <li><a href="#galeria">A Saga</a></li>
-                    <li><a href="#marcar" class="cta-nav">Marcar</a></li>
+                    <li><a href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/davidazdias777/corte-de-cabelo?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=ff0000'});return false;" class="cta-nav">Marcar</a></li>
                 </ul>
             </nav>
         </div>
@@ -71,7 +73,9 @@
         <div class="hero-content" data-aos="fade-in" data-aos-delay="300">
             <h1 class="hero-title-main">VALGRIND</h1>
             <p class="hero-subtitle">Feel like a Viking.</p>
-            <a href="#marcar" class="cta-button">RESERVAR A TUA AUDIÊNCIA</a>
+            
+            <a href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/davidazdias777/corte-de-cabelo?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=ff0000'});return false;" class="cta-button">RESERVAR A TUA AUDIÊNCIA</a>
+        
         </div>
     </section>
 
@@ -290,7 +294,7 @@
         <h2>Reivindica o Teu Lugar</h2>
         <p class="section-subtitle">O teu trono espera por ti. Marca a tua audiência.</p>
         
-        <a href="https://wa.me/351910000000" target="_blank" rel="noopener noreferrer" class="cta-button">MARCAR CORTE OU BARBA</a>
+        <a href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/davidazdias777/corte-de-cabelo?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=ff0000'});return false;" class="cta-button">MARCAR CORTE OU BARBA</a>
         
         <a href="#" id="open-tattoo-modal" class="cta-button cta-tattoo">PEDIR ORÇAMENTO DE TATTOO</a>
 
@@ -334,7 +338,7 @@
             <h2>Pedido de Orçamento</h2>
             <p>Descreve a tua ideia e um dos nossos artistas entrará em contacto para forjar a tua próxima tatuagem.</p>
             
-            <form action="URL_DO_SEU_SCRIPT_DE_FORMULARIO" method="POST" class="tattoo-form">
+            <form action="https://formspree.io/f/manlogzk" method="POST" class="tattoo-form">
                 
                 <div class="form-group">
                     <label for="nome">O Teu Nome:</label>
@@ -361,11 +365,21 @@
                     <input type="file" id="referencia" name="referencia" accept="image/*">
                 </div>
 
-                <button type="submit" class="cta-button">Enviar Pedido de Tinta</button>
+                <div class="modal-send-options">
+    <h4>Como preferes enviar?</h4>
+    <div class="modal-button-group">
+        <button type="submit" class="cta-button">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i> Enviar por Email
+        </button>
+        
+        <button type="button" id="modal-send-whatsapp" class="cta-button cta-whatsapp">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i> Enviar por WhatsApp
+        </button>
+    </div>
+</div>
             </form>
         </div>
     </div>
-
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>

@@ -829,6 +829,9 @@ footer .social-links i { margin-right: 0.5rem; }
     #hero, #pilares {
         border-top: none; /* Garante que estas continuam sem borda */
     }
+    .modal-button-group {
+        flex-direction: column; /* Empilha os botões */
+    }
     /* --- FIM MUDANÇA 1 (Mobile) --- */
 
 
@@ -963,3 +966,49 @@ footer .social-links i { margin-right: 0.5rem; }
         background-color: var(--cor-primaria);
     }
 } /* <-- FIM DO @media */
+
+
+/* --- ESTILOS PARA OPÇÕES DE ENVIO DO MODAL --- */
+.modal-send-options {
+    margin-top: 2rem; /* Espaço acima */
+    border-top: 2px solid var(--cor-borda);
+    padding-top: 1.5rem;
+    text-align: center;
+}
+.modal-send-options h4 {
+    color: var(--cor-texto);
+    font-family: var(--fonte-corpo);
+    font-size: 1.1rem;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+}
+.modal-button-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap; /* Para mobile, caso não caibam */
+}
+.modal-button-group .cta-button {
+    flex: 1; /* Faz os botões dividirem o espaço */
+    margin: 0; /* Remove a margem original do .cta-button */
+    min-width: 180px; /* Largura mínima antes de quebrar a linha */
+}
+
+/* Cor especial para o botão de WhatsApp */
+.cta-button.cta-whatsapp {
+    background-image: none;
+    background-color: var(--cor-whatsapp);
+    border-color: #1fad56;
+    color: #fff;
+}
+.cta-button.cta-whatsapp:hover {
+    background-color: #2bef75;
+    border-color: #25D366;
+    box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+}
+
+/* Ícones dentro dos botões do modal */
+.modal-button-group .cta-button i {
+    margin-right: 0.6rem;
+}
